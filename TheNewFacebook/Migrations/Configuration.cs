@@ -2,6 +2,7 @@ namespace TheNewFacebook.Migrations
 {
     using Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -23,7 +24,7 @@ namespace TheNewFacebook.Migrations
                 new NewsFeed {text="This is the second update", updateDate=DateTime.Now, Author="Kristian Donner", likes=5, UserID=1 },
             };
 
-            newsFeed.ForEach(s => context.NewsFeed.Add(s));
+            newsFeed.ForEach(s => context.NewsFeed.AddOrUpdate(p=> p.text, s));
             context.SaveChanges();
         }
     }

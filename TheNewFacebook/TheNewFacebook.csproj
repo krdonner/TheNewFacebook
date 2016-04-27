@@ -207,13 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604271318587_InitialCreate.cs" />
-    <Compile Include="Migrations\201604271318587_InitialCreate.Designer.cs">
-      <DependentUpon>201604271318587_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271324217_InitialCreate1.cs" />
-    <Compile Include="Migrations\201604271324217_InitialCreate1.Designer.cs">
-      <DependentUpon>201604271324217_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\201604271402338_InitialCreate.cs" />
+    <Compile Include="Migrations\201604271402338_InitialCreate.Designer.cs">
+      <DependentUpon>201604271402338_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -226,6 +222,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\NewsFeed.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -307,11 +304,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604271318587_InitialCreate.resx">
-      <DependentUpon>201604271318587_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271324217_InitialCreate1.resx">
-      <DependentUpon>201604271324217_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604271402338_InitialCreate.resx">
+      <DependentUpon>201604271402338_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
