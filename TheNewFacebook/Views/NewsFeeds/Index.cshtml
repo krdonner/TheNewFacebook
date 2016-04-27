@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TheNewFacebook.Models.NewsFeed>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>News Feed</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@foreach (var item in Model)
+{
+
+    <div style="width:400px; padding:10px; border: 5px solid gray; margin-top:5px; align-self:center;">
+        <table>
+            <tr>   
+                  <h7>Posted:</h7> @Html.DisplayFor(m => item.updateDate)
+            </tr>
+            <tr> 
+                <td>
+                    @Html.DisplayFor(m => item.Author) <h7>wrote:</h7>
+                </td>          
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(m => item.text)</td>
+            </tr>
+            <tr>
+                <td> <h7>Likes:</h7>@Html.DisplayFor(m => item.likes)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+
+        </table>
+        
+    
+    </div>
+}
