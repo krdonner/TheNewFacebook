@@ -16,6 +16,7 @@ namespace TheNewFacebook.Migrations
 
         protected override void Seed(TheNewFacebook.DAL.TNFContext context)
         {
+            /*
             var newsFeed = new List<NewsFeed>
             {
 
@@ -24,7 +25,7 @@ namespace TheNewFacebook.Migrations
             };
 
             newsFeed.ForEach(s => context.NewsFeed.Add(s));
-            context.SaveChanges();
+            context.SaveChanges();*/
         }
     }
 }

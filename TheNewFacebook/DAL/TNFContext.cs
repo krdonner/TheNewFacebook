@@ -12,7 +12,7 @@ namespace TheNewFacebook.DAL
     public class TNFContext : DbContext
     {
 
-        public TNFContext() : base("TNFContext")
+        public TNFContext() : base("TNFContextAdmir")
         {
 
         }
