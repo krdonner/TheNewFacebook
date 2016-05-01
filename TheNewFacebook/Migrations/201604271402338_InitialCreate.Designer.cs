@@ -13,7 +13,7 @@ namespace TheNewFacebook.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604271318587_InitialCreate"; }
+            get { return "201604271402338_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

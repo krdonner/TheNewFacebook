@@ -24,6 +24,7 @@ namespace TheNewFacebook.Controllers
         // GET: NewsFeeds/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -49,9 +50,21 @@ namespace TheNewFacebook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,text,updateDate,likes,author")] NewsFeed newsFeed)
         {
+
             if (ModelState.IsValid)
             {
-                db.NewsFeed.Add(newsFeed);
+                var t = new NewsFeed
+                {
+                    updateDate = DateTime.Now,
+                    text = newsFeed.text,
+                    Author = newsFeed.Author,
+                    likes = 0,
+                    UserID = 1
+
+
+
+                };
+                db.NewsFeed.Add(t);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

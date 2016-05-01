@@ -2,6 +2,7 @@ namespace TheNewFacebook.Migrations
 {
     using Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -16,7 +17,6 @@ namespace TheNewFacebook.Migrations
 
         protected override void Seed(TheNewFacebook.DAL.TNFContext context)
         {
-            /*
             var newsFeed = new List<NewsFeed>
             {
 
@@ -24,8 +24,8 @@ namespace TheNewFacebook.Migrations
                 new NewsFeed {text="This is the second update", updateDate=DateTime.Now, Author="Kristian Donner", likes=5, UserID=1 },
             };
 
-            newsFeed.ForEach(s => context.NewsFeed.Add(s));
-            context.SaveChanges();*/
+            newsFeed.ForEach(s => context.NewsFeed.AddOrUpdate(p=> p.text, s));
+            context.SaveChanges();
         }
     }
 }
