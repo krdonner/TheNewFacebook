@@ -10,6 +10,11 @@ namespace TheNewFacebook.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Image { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
+        public string RelationshipStatus { get; set; }
+        public string Workplace { get; set; }
 
         public virtual ICollection<NewsFeed> NewsFeed { get; set; }
     }

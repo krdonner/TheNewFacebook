@@ -1,7 +1,14 @@
-﻿
+﻿@model TheNewFacebook.Models.Users
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Detta är min index!</h2>
+<h4>Living in: @Html.DisplayFor(m => m.City)</h4>
+<h4 >Phone number: @Html.DisplayFor(m => m.Phone)</h4>
+<h4>RelationshipStatus: @Html.DisplayFor(m => m.RelationshipStatus)</h4>
+<h4>Workplace: @Html.DisplayFor(m => m.Workplace)</h4>
+<h4>@Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.LastName)</h4>
+<img src="@Url.Content(Model.Image)alt="Image" height="220" width="180/>
+
 
