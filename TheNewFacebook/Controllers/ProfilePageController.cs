@@ -19,9 +19,9 @@ namespace TheNewFacebook.Controllers
                 Email = "thomas.donner@mail.com",
                 Password = "abc123",
                 Image = "http://www.abf.se/ImageVaultFiles/id_6739/cf_77/j-rgen.JPG",
-                City = "Malmö",
+                City = "London",
                 Phone = "0709 62 44 12",
-                RelationshipStatus = "Married to Heather Wall",
+                RelationshipStatus = "Married",
                 Workplace = "Dentist at Oral care London"
             };
 
