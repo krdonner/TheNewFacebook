@@ -16,12 +16,37 @@ namespace TheNewFacebook.Controllers
         private TNFContext db = new TNFContext();
 
         // GET: Users
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Index(string searchString)
         {
+
+            var users = from u in db.Users
+                        select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                if (db.Users.Any(u => u.FirstName == searchString))
+                {
+                    users = users.Where(u => u.FirstName.Contains(searchString));
+                    return View(users);
+                }
+
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(users);
+
+
+
+            /*
             var users = from s in db.Users select s;
             users = users.Where(s => s.FirstName.Contains("Bertil") && s.LastName.Contains("Hansson"));
 
-            return View(users.ToList());
+            return View(users.ToList());   */
         }
 
         // GET: Users/Details/5
