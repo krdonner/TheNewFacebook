@@ -203,7 +203,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
-    <Compile Include="Controllers\ProfilePageController.cs" />
     <Compile Include="DAL\TNFContext.cs" />
     <Compile Include="DAL\TNFInitializer.cs" />
     <Compile Include="Global.asax.cs">
