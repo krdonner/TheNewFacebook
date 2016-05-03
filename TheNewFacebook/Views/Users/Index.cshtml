@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TheNewFacebook.Models.Users>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="well well-lg clearfix">
+
+
+            <div class="col-xs-6 col-md-4">
+
+                <div class="alert alert-info">
+                    <p>
+                        @foreach (var item in Model)
+                        {
+                            <h4><b>Information</b></h4>
+                            <b>Living in:</b> @Html.DisplayFor(model => item.City)<br />
+                            <b>Phone number:</b> @Html.DisplayFor(model => item.Phone)<br />
+                            <b>Relationship status:</b> @Html.DisplayFor(model => item.RelationshipStatus)<br />
+                            <b>Workplace:</b> @Html.DisplayFor(model => item.Workplace)
+                        }
+
+                    </p>
+                </div>
+
+                <div class="alert alert-info">
+                    <p>
+                        <h4><b>Member of groups</b></h4>
+                        <b>Group X</b><br />
+                        <b>Group X</b><br />
+                        <b>Group X</b><br />
+                        <b>Group X</b><br />
+                        <b>Group X</b><br />
+                        <b>Group X</b><br />
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-md-4 col-md-push-4">
+                <div class="alert alert-danger">
+                    <p>
+                        @foreach (var item in Model)
+                        {
+                            <h5><b>@Html.DisplayFor(model => item.FirstName) @Html.DisplayFor(model => item.LastName)</b></h5>
+                            <img src="@Url.Content(item.Image)alt=" Image" height="220" width="180" /><br /><br />
+
+                     
+
+                            <a href="@Url.Action("Edit", "Users", new { id = item.ID})">
+                                <img src="@Url.Content("~/Img/settings.png")" />
+                            </a>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,6 +21,23 @@ namespace TheNewFacebook.DAL
             newsFeed.ForEach(s => context.NewsFeed.Add(s));
             context.SaveChanges();
 
+            var users = new List<Users>
+            {
+                new Users
+                {
+                    FirstName = "Tomas",
+                    LastName = "Donner",
+                    Email = "thomas.donner@mail.com",
+                    Password = "abc123",
+                    Image = "http://www.abf.se/ImageVaultFiles/id_6739/cf_77/j-rgen.JPG",
+                    City = "London",
+                    Phone = "0709 62 44 12",
+                    RelationshipStatus = "Married",
+                    Workplace = "Dentist Care"
+                }
+            };
+            users.ForEach(s => context.Users.Add(s));
+            context.SaveChanges();
         }
     }
 }

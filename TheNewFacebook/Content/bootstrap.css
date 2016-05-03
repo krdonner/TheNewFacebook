@@ -790,6 +790,7 @@ pre code {
   margin-right: -15px;
   margin-left: -15px;
   margin-bottom:20px;
+  margin-top:60px;
 }
 
 .row:before,
@@ -5573,6 +5574,8 @@ a.list-group-item:focus {
 .well-lg {
   padding: 24px;
   border-radius: 6px;
+  background-color: #FFFFFF;
+  border-color: #000000;
 }
 
 .well-sm {
@@ -6820,7 +6823,5 @@ td.visible-print {
   th.hidden-print,
   td.hidden-print {
     display: none !important;
-  }
-
- 
+  } 
 }

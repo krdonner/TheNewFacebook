@@ -18,6 +18,7 @@ namespace TheNewFacebook.DAL
         }
 
         public DbSet<NewsFeed> NewsFeed { get; set; }
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

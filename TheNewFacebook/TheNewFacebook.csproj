@@ -202,17 +202,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsFeedsController.cs" />
-    <Compile Include="Controllers\ProfilePageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\TNFContext.cs" />
     <Compile Include="DAL\TNFInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604271402338_InitialCreate.cs" />
-    <Compile Include="Migrations\201604271402338_InitialCreate.Designer.cs">
-      <DependentUpon>201604271402338_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Groups.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -230,6 +225,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\settings.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -291,7 +287,11 @@
     <Content Include="Views\NewsFeeds\Details.cshtml" />
     <Content Include="Views\NewsFeeds\Edit.cshtml" />
     <Content Include="Views\NewsFeeds\Index.cshtml" />
-    <Content Include="Views\ProfilePage\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -306,11 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604271402338_InitialCreate.resx">
-      <DependentUpon>201604271402338_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
