@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -31,22 +32,8 @@ namespace TheNewFacebook.Controllers
                     users = users.Where(u => u.FirstName.Contains(searchString));
                     return View(users);
                 }
-
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
             }
-
-            return View(users);
-
-
-
-            /*
-            var users = from s in db.Users select s;
-            users = users.Where(s => s.FirstName.Contains("Bertil") && s.LastName.Contains("Hansson"));
-
-            return View(users.ToList());   */
+            return RedirectToAction("NoUser", new { var = searchString });
         }
 
         // GET: Users/Details/5
@@ -152,5 +139,11 @@ namespace TheNewFacebook.Controllers
             }
             base.Dispose(disposing);
         }
-    }
+
+        public ActionResult NoUser(string var)
+        {
+            ViewData["FirstName"] = var;
+            return View();
+        }
+    }    
 }
