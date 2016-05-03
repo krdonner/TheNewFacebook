@@ -21,22 +21,13 @@ namespace TheNewFacebook.DAL
             newsFeed.ForEach(s => context.NewsFeed.Add(s));
             context.SaveChanges();
 
-            var users = new List<Users>
+            var groups = new List<Groups>
             {
-                new Users
-                {
-                    FirstName = "Tomas",
-                    LastName = "Donner",
-                    Email = "thomas.donner@mail.com",
-                    Password = "abc123",
-                    Image = "http://www.abf.se/ImageVaultFiles/id_6739/cf_77/j-rgen.JPG",
-                    City = "London",
-                    Phone = "0709 62 44 12",
-                    RelationshipStatus = "Married",
-                    Workplace = "Dentist Care"
-                }
+
+                new Groups {Name = "Friluftsliv" },
+                new Groups {Name = "Hockey" }
             };
-            users.ForEach(s => context.Users.Add(s));
+            groups.ForEach(s => context.Groups.Add(s));
             context.SaveChanges();
         }
     }

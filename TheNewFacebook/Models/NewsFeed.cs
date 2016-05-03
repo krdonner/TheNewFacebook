@@ -14,6 +14,8 @@ namespace TheNewFacebook.Models
         public int likes { get; set; }
         public string Author { get; set; }
         public int UserID { get; set; }
+        public string Type { get; set; }
+        public string GroupName { get; set; }
 
        //public User User { get; set; }
 

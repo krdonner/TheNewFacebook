@@ -1,0 +1,38 @@
+﻿@model TheNewFacebook.Models.GroupsViewModel
+
+
+
+
+<div class="jumbotron">
+ @foreach (var item in Model.Group)
+ {
+
+    @Html.DisplayFor(m => item.Name)
+}
+
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model.NewsFeed.OrderByDescending(t => t.updateDate))
+{
+
+
+    <div class="wrap">
+        <h1>@Html.DisplayFor(m => item.updateDate)</h1>
+        <p>
+            @Html.DisplayFor(m => item.Author)
+        </p>
+        <img src="http://www.wpthemegenerator.com/wp-content/uploads/2012/06/Image.jpg">
+
+        <p>
+            @Html.DisplayFor(m => item.text)
+        </p>
+        <br />
+        <p>Likes: @Html.DisplayFor(m => item.likes)</p>
+    </div>
+
+}
+
+
