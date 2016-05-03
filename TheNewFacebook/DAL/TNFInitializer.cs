@@ -15,7 +15,7 @@ namespace TheNewFacebook.DAL
             {
 
                 new NewsFeed {text="This is the first update", updateDate=DateTime.Now, Author="Kristian Donner", likes=4, UserID=1 },
-                new NewsFeed {text="This is the second update", updateDate=DateTime.Now, Author="Kristian Donner", likes=5, UserID=1 },
+                new NewsFeed {text="This is the second update", updateDate=DateTime.Now, Author="Kristian Donner", likes=5, UserID=1 }
             };
 
             newsFeed.ForEach(s => context.NewsFeed.Add(s));
