@@ -19,7 +19,7 @@ namespace TheNewFacebook.Controllers
         public ActionResult Index()
         {
             var users = from s in db.Users select s;
-            users = users.Where(s => s.FirstName.Contains("Tomas"));
+            users = users.Where(s => s.FirstName.Contains("Bertil") && s.LastName.Contains("Hansson"));
 
             return View(users.ToList());
         }
