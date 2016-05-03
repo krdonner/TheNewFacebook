@@ -21,6 +21,14 @@ namespace TheNewFacebook.DAL
             newsFeed.ForEach(s => context.NewsFeed.Add(s));
             context.SaveChanges();
 
+            var groups = new List<Groups>
+            {
+
+                new Groups {Name = "Friluftsliv" },
+                new Groups {Name = "Hockey" }
+            };
+            groups.ForEach(s => context.Groups.Add(s));
+            context.SaveChanges();
         }
     }
 }

@@ -12,5 +12,6 @@ namespace TheNewFacebook.Models
         public string Password { get; set; }
 
         public virtual ICollection<NewsFeed> NewsFeed { get; set; }
+        public virtual ICollection<Groups> Groups { get; set; }
     }
 }

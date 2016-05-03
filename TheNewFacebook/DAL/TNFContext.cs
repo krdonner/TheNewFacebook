@@ -18,9 +18,22 @@ namespace TheNewFacebook.DAL
         }
 
         public DbSet<NewsFeed> NewsFeed { get; set; }
+        public DbSet<Groups> Groups { get; set; }
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Groups>().
+               HasMany(c => c.Users).
+               WithMany(p => p.Groups).
+               Map(
+               m =>
+               {
+                   m.MapLeftKey("GroupID");
+                   m.MapRightKey("UserID");
+                   m.ToTable("GroupUser");
+
+               });
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
