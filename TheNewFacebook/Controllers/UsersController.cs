@@ -30,23 +30,9 @@ namespace TheNewFacebook.Controllers
                 {
                     users = users.Where(u => u.FirstName.Contains(searchString));
                     return View(users);
-                }
-
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                }                
             }
-
-            return View(users);
-
-
-
-            /*
-            var users = from s in db.Users select s;
-            users = users.Where(s => s.FirstName.Contains("Bertil") && s.LastName.Contains("Hansson"));
-
-            return View(users.ToList());   */
+            return RedirectToAction("NoUser", new { firstname = searchString });
         }
 
         // GET: Users/Details/5
@@ -151,6 +137,12 @@ namespace TheNewFacebook.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult NoUser(string firstname)
+        {
+            ViewData["FirstName"] =firstname;
+            return View();
         }
     }
 }
