@@ -32,47 +32,6 @@ namespace TheNewFacebook.Controllers
             groupsViewModel.Group = group;
             
 
-            /*
-                       string name = "Friluftsliv";
-                       var a =
-                           from x in db.NewsFeed
-                           where x.GroupName == name
-                           select new NewsFeed
-                           {
-                               Author = x.Author,
-                               text = x.text,
-                               likes = x.likes,
-                               updateDate = x.updateDate
-
-                           };
-                       var model = new GroupsViewModel
-                       {
-                           NewsFeed = a.
-
-                       };
-
-                       x;
-                   foreach (var nf in a)
-                   {
-
-                       Debug.WriteLine("NF : " + nf);
-
-                       var newsFeed = new NewsFeed{
-
-                           Author = nf.Author,
-                           text = nf.text,
-                           likes = nf.likes,
-                           updateDate = nf.updateDate,
-
-                       };
-                       Debug.WriteLine("NEWSFEED " + newsFeed);
-                       model.NewsFeed = new List<NewsFeed>();
-                       model.NewsFeed.Add(newsFeed);
-
-                      }
-
-
-                   Debug.WriteLine("MODEL.NEWSFEED: " + model.NewsFeed.Count());*/
             return View(groupsViewModel);
         }
 
