@@ -23,6 +23,7 @@ namespace TheNewFacebook.Controllers
         // GET: Groups
         public ActionResult Index()
         {
+
             var group = from a in db.Groups select a;
             group = group.Where(a => a.Name.Contains("Friluftsliv"));
             var newsfeed = from s in db.NewsFeed select s;
@@ -30,7 +31,7 @@ namespace TheNewFacebook.Controllers
             GroupsViewModel groupsViewModel = new GroupsViewModel();
             groupsViewModel.NewsFeed = newsfeed;
             groupsViewModel.Group = group;
-            
+
 
             return View(groupsViewModel);
         }

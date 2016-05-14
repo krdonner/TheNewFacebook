@@ -16,6 +16,7 @@ namespace TheNewFacebook.Controllers
         private TNFContext db = new TNFContext();
 
         // GET: NewsFeeds
+        [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult Index()
         {
             return View(db.NewsFeed.ToList());
@@ -136,6 +137,25 @@ namespace TheNewFacebook.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public class LayoutInjecterAttribute : ActionFilterAttribute
+        {
+            private readonly string _masterName;
+            public LayoutInjecterAttribute(string masterName)
+            {
+                _masterName = masterName;
+            }
+
+            public override void OnActionExecuted(ActionExecutedContext filterContext)
+            {
+                base.OnActionExecuted(filterContext);
+                var result = filterContext.Result as ViewResult;
+                if (result != null)
+                {
+                    result.MasterName = _masterName;
+                }
+            }
         }
     }
 }

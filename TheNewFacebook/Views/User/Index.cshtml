@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TheNewFacebook.Models.Users>
+﻿@model TheNewFacebook.Models.ProfilePageViewModel
 
 <div class="container text-center">
     <div class="row">
@@ -9,7 +9,7 @@
 
                 <div class="alert alert-info">
                     <p>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.User)
                         {
                             <h4><b>Information</b></h4>
                             <b>Living in:</b> @Html.DisplayFor(model => item.City)<br />
@@ -34,19 +34,38 @@
                 </div>
             </div>
 
-            <div class="col-xs-6 col-md-4 col-md-push-4">
+            <div class="col-xs-6 col-md-4">
+                @foreach (var item in Model.NewsFeed.OrderByDescending(t => t.updateDate))
+            {
+
+
+                    <div class="wrap">
+                        <h1>@Html.DisplayFor(m => item.updateDate)</h1>
+                        <p>
+                            @Html.DisplayFor(m => item.Author)
+                        </p>
+                        <img src="http://www.wpthemegenerator.com/wp-content/uploads/2012/06/Image.jpg">
+
+                        <p>
+                            @Html.DisplayFor(m => item.text)
+                        </p>
+                        <br />
+                        <p>Likes: @Html.DisplayFor(m => item.likes)</p>
+                    </div>
+
+                }
+            </div>
+            <div class="col-xs-6 col-md-4">
                 <div class="alert alert-danger">
                     <p>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.User)
                         {
                             <h5><b>@Html.DisplayFor(model => item.FirstName) @Html.DisplayFor(model => item.LastName)</b></h5>
                             <img src="@Url.Content(item.Image)" height="220" width="180" /><br /><br />
 
-                     
 
-                            <a href="@Url.Action("Edit", "Users", new { id = item.ID})">
-                                <img src="@Url.Content("~/Img/settings.png")" />
-                            </a>
+
+
                         }
                     </p>
                 </div>
