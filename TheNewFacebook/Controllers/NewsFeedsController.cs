@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,6 +15,31 @@ namespace TheNewFacebook.Controllers
     public class NewsFeedsController : Controller
     {
         private TNFContext db = new TNFContext();
+
+        [LayoutInjecter("_LayoutLoggedIn")]
+        public ActionResult AddNewsFeedFromProfilePage()
+        {
+
+
+            return PartialView("_AddNewsFeed");
+        }
+
+        [LayoutInjecter("_LayoutLoggedIn")]
+        public ActionResult CommentsView(int? newsfeedID)
+        {
+
+            /*  var comments = db.Comments.Where(u => u.)
+              .Select(u => new
+              {
+                  ID = u.ID,
+                  Author = u.FirstName + " " + u.LastName
+              }).Single();
+              var id = userID.ID;
+              var author = userID.Author;*/
+
+            return PartialView("_Comments"); 
+        }
+
 
         // GET: NewsFeeds
         [LayoutInjecter("_LayoutLoggedIn")]
@@ -38,9 +64,54 @@ namespace TheNewFacebook.Controllers
             return View(newsFeed);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFromGroup([Bind(Include = "ID,text,updateDate,likes,author,groupname")] NewsFeed newsFeed)
+        {
+            string email = Session["Email"].ToString();
+            string nameOfGroup = Session["CurrentlySelectedGroup"].ToString();
+
+
+
+            var userID = db.Users.Where(u => u.Email == email)
+            .Select(u => new
+            {
+                ID = u.ID,
+                Author = u.FirstName + " " + u.LastName
+            }).Single();
+            var id = userID.ID;
+            var author = userID.Author;
+
+            Debug.WriteLine("KOMMER IN I CREATE");
+
+            if (ModelState.IsValid)
+            {
+                var t = new NewsFeed
+                {
+                    updateDate = DateTime.Now,
+                    GroupName = nameOfGroup,
+                    text = newsFeed.text,
+                    Author = author,
+                    likes = 0,
+                    UserID = id
+
+
+
+                };
+                db.NewsFeed.Add(t);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Groups");
+            }
+
+            return View(newsFeed);
+        }
+
+
+
         // GET: NewsFeeds/Create
         public ActionResult Create()
         {
+            Debug.WriteLine("KOMMER IN I CREATE GET");
             return View();
         }
 
@@ -51,6 +122,20 @@ namespace TheNewFacebook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,text,updateDate,likes,author")] NewsFeed newsFeed)
         {
+            string email = Session["Email"].ToString();
+
+
+
+            var userID = db.Users.Where(u => u.Email == email)
+            .Select(u => new
+            {
+                ID = u.ID,
+                Author = u.FirstName + " " + u.LastName
+            }).Single();
+            var id = userID.ID;
+            var author = userID.Author;
+
+            Debug.WriteLine("KOMMER IN I CREATE");
 
             if (ModelState.IsValid)
             {
@@ -58,16 +143,16 @@ namespace TheNewFacebook.Controllers
                 {
                     updateDate = DateTime.Now,
                     text = newsFeed.text,
-                    Author = newsFeed.Author,
+                    Author = author,
                     likes = 0,
-                    UserID = 1
+                    UserID = id
 
 
 
                 };
                 db.NewsFeed.Add(t);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ProfilePage", "User");
             }
 
             return View(newsFeed);

@@ -8,13 +8,23 @@ using System.Threading.Tasks;
 namespace TheNewFacebook.Models
 {
    public class Groups
-    {   
+    {
         [Key]
         public int ID { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Users> Users { get; set; }
-        
-        
+        [Required]
+        public string Category { get; set; }
+
+        [Required]
+        public string Information { get; set; }
+
+        [Required]
+        public string Image { get; set; }
+
+        public ICollection<Users> Users { get; set; }
+
     }
 }

@@ -80,6 +80,7 @@ namespace TheNewFacebook.Controllers
                 Session["FirstName"] = users.FirstName;
                 Session["LastName"] = users.LastName;
                 Session["Email"] = users.Email;
+                Session["Name"] = users.FirstName + " " + users.LastName;
                 Debug.WriteLine(Session["User"]);
                 db.Users.Add(users);
                 db.SaveChanges();
@@ -104,7 +105,7 @@ namespace TheNewFacebook.Controllers
             }).Single();
             var id = feed.ID;
 
-
+            //var comment = db.C
 
 
 
@@ -113,6 +114,9 @@ namespace TheNewFacebook.Controllers
 
             var newsfeed = from s in db.NewsFeed select s;
             newsfeed = newsfeed.Where(s => s.UserID.Equals(id));
+
+
+
 
             ProfilePageViewModel profilePageViewModel = new ProfilePageViewModel();
             profilePageViewModel.NewsFeed = newsfeed;
@@ -129,12 +133,7 @@ namespace TheNewFacebook.Controllers
             return View();
         }
 
-        [LayoutInjecter("_Layout")]
-        public ActionResult LogOff()
-        {
 
-            return View("Login", "~/Views/Shared/_Layout.cshtml");
-        }
 
         [HttpPost]
         public ActionResult Login([Bind(Include = "Password,Email")] Users users)
@@ -172,6 +171,13 @@ namespace TheNewFacebook.Controllers
 
         }
 
+        [LayoutInjecter("_Layout")]
+        public ActionResult LogOff()
+        {
+
+            return View("Login", "~/Views/Shared/_Layout.cshtml");
+        }
+
         // GET: User/Edit/5
         [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult Edit(int? id)
@@ -195,15 +201,15 @@ namespace TheNewFacebook.Controllers
         [ValidateAntiForgeryToken]
         [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Password,Email,Image,City,Phone,RelationshipStatus,Workplace")] Users users)
-        {       
+        {
 
 
             //if (ModelState.IsValid)
             //{
-                Debug.WriteLine("INNE I ISVALID");
-                db.Entry(users).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ProfilePage");
+            Debug.WriteLine("INNE I ISVALID");
+            db.Entry(users).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ProfilePage");
             //}
             //return View(users);
         }

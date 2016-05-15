@@ -40,7 +40,7 @@ namespace TheNewFacebook.Models
         public string Workplace { get; set; }
 
 
-        public virtual ICollection<NewsFeed> NewsFeed { get; set; }
-        public virtual ICollection<Groups> Groups { get; set; }
+        public  ICollection<NewsFeed> NewsFeed { get; set; }
+        public  ICollection<Groups> Groups { get; set; }
     }
 }

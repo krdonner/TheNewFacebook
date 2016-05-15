@@ -20,14 +20,45 @@ namespace TheNewFacebook.Controllers
 
         private TNFContext db = new TNFContext();
 
-        // GET: Groups
-        public ActionResult Index()
+        [LayoutInjecter("_LayoutLoggedIn")]
+        public ActionResult ShowAllGroups()
         {
+           /* var groupsList = new List<Groups>();
+
+            using (db)
+            {
+                foreach (var groups in db.Groups)
+                {
+                    var cl = new Groups
+                    {
+                        Name = groups.Name,
+                        Category = groups.Category,
+                        ID = groups.ID,
+                        Image = groups.Image,
+                        Information = groups.Information
+                    };
+                    groupsList.Add(cl);
+                }
+
+            }*/
+
+            return View(db.Groups.ToList());
+
+        }
+
+
+
+        // GET: Groups
+        [LayoutInjecter("_LayoutLoggedIn")]
+        public ActionResult Index(string groupName)
+        {
+            groupName = "Smurfarna";
+            Session["CurrentlySelectedGroup"] = groupName;
 
             var group = from a in db.Groups select a;
-            group = group.Where(a => a.Name.Contains("Friluftsliv"));
+            group = group.Where(a => a.Name.Contains(groupName));
             var newsfeed = from s in db.NewsFeed select s;
-            newsfeed = newsfeed.Where(s => s.GroupName.Contains("friluftsliv"));
+            newsfeed = newsfeed.Where(s => s.GroupName.Contains(groupName));
             GroupsViewModel groupsViewModel = new GroupsViewModel();
             groupsViewModel.NewsFeed = newsfeed;
             groupsViewModel.Group = group;
@@ -62,6 +93,7 @@ namespace TheNewFacebook.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult Create([Bind(Include = "ID,Name")] Groups groups)
         {
             if (ModelState.IsValid)
@@ -139,5 +171,26 @@ namespace TheNewFacebook.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public class LayoutInjecterAttribute : ActionFilterAttribute
+        {
+            private readonly string _masterName;
+            public LayoutInjecterAttribute(string masterName)
+            {
+                _masterName = masterName;
+            }
+
+            public override void OnActionExecuted(ActionExecutedContext filterContext)
+            {
+                base.OnActionExecuted(filterContext);
+                var result = filterContext.Result as ViewResult;
+                if (result != null)
+                {
+                    result.MasterName = _masterName;
+                }
+            }
+        }
     }
+
+
 }

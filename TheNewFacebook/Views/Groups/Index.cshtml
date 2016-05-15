@@ -1,38 +1,62 @@
 ﻿@model TheNewFacebook.Models.GroupsViewModel
 
+<div class="container text-center">
+    <div class="row">
+        <div class="well well-lg clearfix">
+            @foreach (var item in Model.Group)
+            {
+                <img src="@Url.Content(item.Image)" height="100" width="1060" /><br /><br />
+            }
+
+            <div class="col-xs-6 col-md-4">
+
+                <div class="alert alert-info">
+                    <p>
+
+                        @foreach (var item in Model.Group)
+                        {
+                            <h4><b>Information</b></h4>
+                            <b>Group name:</b> @Html.DisplayFor(m => item.Name)<br />
+                            <b>Category:</b> @Html.DisplayFor(m => item.Category)<br />
+                        }
+                    </p>
+                </div>
+
+                <div class="alert alert-info">
+
+                    @foreach (var item in Model.Group)
+                    {
+                        <p>@Html.DisplayFor(m => item.Information)</p>
+                    }
 
 
 
-<div class="jumbotron">
- @foreach (var item in Model.Group)
- {
+                </div>
+            </div>
 
-    @Html.DisplayFor(m => item.Name)
-}
+            <div class="col-xs-6 col-md-4">
+                @Html.Partial("_AddNewsFeedGroup", new TheNewFacebook.Models.NewsFeed())
 
-</div>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@foreach (var item in Model.NewsFeed.OrderByDescending(t => t.updateDate))
-{
+                @foreach (var item in Model.NewsFeed.OrderByDescending(t => t.updateDate))
+                {
 
 
-    <div class="wrap">
-        <h1>@Html.DisplayFor(m => item.updateDate)</h1>
-        <p>
-            @Html.DisplayFor(m => item.Author)
-        </p>
-        <img src="http://www.wpthemegenerator.com/wp-content/uploads/2012/06/Image.jpg">
+                    <div class="wrap">
+                        <h1>@Html.DisplayFor(m => item.updateDate)</h1>
+                        <p>
+                            @Html.DisplayFor(m => item.Author)
+                        </p>
+                        <img src="http://www.wpthemegenerator.com/wp-content/uploads/2012/06/Image.jpg">
 
-        <p>
-            @Html.DisplayFor(m => item.text)
-        </p>
-        <br />
-        <p>Likes: @Html.DisplayFor(m => item.likes)</p>
+                        <p>
+                            @Html.DisplayFor(m => item.text)
+                        </p>
+                        <br />
+                        <p>Likes: @Html.DisplayFor(m => item.likes)</p>
+                    </div>
+                }
+            </div>
+
+        </div>
     </div>
-
-}
-
-
+</div>

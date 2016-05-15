@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TheNewFacebook.Models.Groups>
+
+<table class="table">
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(Html.DisplayFor(model => item.Name).ToHtmlString(), "Index", "Groups" )
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Information)
+            </td>
+        </tr>
+    }
+
+</table>

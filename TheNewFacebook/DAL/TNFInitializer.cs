@@ -24,8 +24,7 @@ namespace TheNewFacebook.DAL
             var groups = new List<Groups>
             {
 
-                new Groups {Name = "Friluftsliv" },
-                new Groups {Name = "Hockey" }
+                new Groups {Name = "Friluftsliv", Category="Sport", Image="http://pixelosaur.com/blog/wp-content/uploads/2015/01/camping-icons.png", Information="The outdoors is great" }
             };
             groups.ForEach(s => context.Groups.Add(s));
             context.SaveChanges();
