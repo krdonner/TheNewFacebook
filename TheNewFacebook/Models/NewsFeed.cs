@@ -18,7 +18,7 @@ namespace TheNewFacebook.Models
         public string Type { get; set; }
         public string GroupName { get; set; }
         public string ImagePath { get; set; }
-        public List<Comments> Comments { get; set; }
+        public IEnumerable<Comments> Comments { get; set; }
 
 
         //public IEnumerable<Comments> Comments { get; set; }

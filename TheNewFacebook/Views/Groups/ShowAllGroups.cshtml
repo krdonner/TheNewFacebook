@@ -3,11 +3,29 @@
 <table class="table">
 
 
+    <tr style="margin-top:100px;">
+        
+        <th>
+            @Html.Label("Name")
+        </th>
+        
+        <th>
+            @Html.Label("Category")
+        </th>
+        <th>
+           @Html.Label("Information")
+
+
+
+
+    </tr>
+
     @foreach (var item in Model)
     {
         <tr>
+
             <td>
-                @Html.ActionLink(Html.DisplayFor(model => item.Name).ToHtmlString(), "Index", "Groups", new { groupName = item.Name.ToString()}, null)
+                @Html.ActionLink(Html.DisplayFor(model => item.Name).ToHtmlString(), "Index", "Groups", new { groupName = item.Name.ToString() }, null)
             </td>
             <td>
                 @Html.DisplayFor(model => item.Category)
@@ -18,7 +36,7 @@
             <td>
                 @using (Html.BeginForm("JoinGroup", "Groups", new { idGroup = item.ID }, FormMethod.Post))
                 {
-                    <input type="submit" value="Press here" />
+                    <input type="submit" class="btn btn-default" value="Join Group" />
                 }
             </td>
         </tr>

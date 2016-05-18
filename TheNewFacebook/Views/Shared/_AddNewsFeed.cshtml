@@ -33,9 +33,7 @@
                 @Html.ValidationMessageFor(model => model.text, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImagePath)
-        </div>
+
         <div class="editor-field">
             <input id="ImagePath" title="Upload a product image"
                    type="file" name="file" />

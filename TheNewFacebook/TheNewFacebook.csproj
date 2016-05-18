@@ -221,23 +221,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
-    <Compile Include="Migrations\201605151125473_InitialCreate.cs" />
-    <Compile Include="Migrations\201605151125473_InitialCreate.Designer.cs">
-      <DependentUpon>201605151125473_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605170905189_imagepath.cs" />
-    <Compile Include="Migrations\201605170905189_imagepath.Designer.cs">
-      <DependentUpon>201605170905189_imagepath.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605172007163_ShoppingCart.cs" />
-    <Compile Include="Migrations\201605172007163_ShoppingCart.Designer.cs">
-      <DependentUpon>201605172007163_ShoppingCart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605181342285_ImagePathShirt.cs" />
-    <Compile Include="Migrations\201605181342285_ImagePathShirt.Designer.cs">
-      <DependentUpon>201605181342285_ImagePathShirt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Comments.cs" />
@@ -524,20 +507,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605151125473_InitialCreate.resx">
-      <DependentUpon>201605151125473_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605170905189_imagepath.resx">
-      <DependentUpon>201605170905189_imagepath.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605172007163_ShoppingCart.resx">
-      <DependentUpon>201605172007163_ShoppingCart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605181342285_ImagePathShirt.resx">
-      <DependentUpon>201605181342285_ImagePathShirt.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -10,6 +10,7 @@ namespace TheNewFacebook.Models
     {
         public IEnumerable<NewsFeed> NewsFeed { get; set; }
         public IEnumerable<Users> User { get; set; }
+        
 
 
         public ProfilePageViewModel()

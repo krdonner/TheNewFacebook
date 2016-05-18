@@ -60,7 +60,22 @@ namespace TheNewFacebook.Controllers
         public ActionResult Index()
         {
 
+            var newsFeed = db.NewsFeed.ToList();
+            var comments = db.Comments.ToList();
 
+            foreach(var item in newsFeed)
+            {
+                foreach(var comment in comments)
+                {
+                    if(comment.NewsFeedId == item.ID)
+                    {
+                       // item.Comments = comment;
+
+                    }
+
+                }
+
+            }
 
 
             return View(db.NewsFeed.ToList());

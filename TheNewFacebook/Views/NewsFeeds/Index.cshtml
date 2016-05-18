@@ -17,7 +17,11 @@
             <p>
                 @Html.DisplayFor(m => item.Author)
             </p>
-            <img src="http://www.wpthemegenerator.com/wp-content/uploads/2012/06/Image.jpg">
+            @if (item.ImagePath != null)
+            {
+                <img src="@Url.Content(item.ImagePath)" alt="Image" width="50" height="150" />
+            }
+
 
             <p>
                 @Html.DisplayFor(m => item.text)
