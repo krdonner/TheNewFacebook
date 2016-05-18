@@ -21,6 +21,11 @@ namespace TheNewFacebook.DAL
         public DbSet<Groups> Groups { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Comments> Comments { get; set; }
+        public DbSet<Shirts> Shirts { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Groups>().

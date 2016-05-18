@@ -6,27 +6,26 @@
 
 <h2>News Feed</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 
-@foreach (var item in Model.OrderByDescending(t=>t.updateDate))
+@foreach (var item in Model.OrderByDescending(t => t.updateDate))
 {
 
-    
+
         <div class="wrap">
             <h1>@Html.DisplayFor(m => item.updateDate)</h1>
             <p>
-                @Html.DisplayFor(m=> item.Author)
+                @Html.DisplayFor(m => item.Author)
             </p>
             <img src="http://www.wpthemegenerator.com/wp-content/uploads/2012/06/Image.jpg">
 
             <p>
-                @Html.DisplayFor(m=> item.text)
+                @Html.DisplayFor(m => item.text)
             </p>
             <br />
-            <p>Likes: @Html.DisplayFor(m=> item.likes)</p>
+            
+      @*@{Html.RenderAction("CommentsView", "NewsFeeds", new List<TheNewFacebook.Models.Comments> { new TheNewFacebook.Models.Comments() }); }  *@
+        <p>Likes: @Html.DisplayFor(m => item.likes)</p>
         </div>
-        
-}
+
+        }

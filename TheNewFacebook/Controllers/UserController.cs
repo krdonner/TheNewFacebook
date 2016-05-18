@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -96,8 +98,6 @@ namespace TheNewFacebook.Controllers
             Debug.WriteLine("KOMMER TILL PROFILEPAGE");
             string Email = Session["Email"].ToString();
 
-
-
             var feed = db.Users.Where(u => u.Email == Email)
             .Select(u => new
             {
@@ -105,15 +105,46 @@ namespace TheNewFacebook.Controllers
             }).Single();
             var id = feed.ID;
 
-            //var comment = db.C
-
-
-
             var user = from a in db.Users select a;
             user = user.Where(a => a.Email.Equals(Email));
 
             var newsfeed = from s in db.NewsFeed select s;
             newsfeed = newsfeed.Where(s => s.UserID.Equals(id));
+
+            var tempUserID = db.Users.Where(u => u.Email == Email)
+            .Select(u => new
+            {
+                ID = u.ID
+            }).Single();
+            var usersID = tempUserID.ID;
+
+            string connStr = ConfigurationManager.ConnectionStrings["TNFContext"].ConnectionString;
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["TNFContext"].ConnectionString);
+            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[GroupUser] WHERE UserID=@id", connection);
+            command.Parameters.AddWithValue("@id", usersID);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                List<int> mylist = new List<int>();
+                while (reader.Read())
+                {
+                    mylist.Add(reader.GetInt32(0));
+                }
+
+                getGroupInfo(mylist);
+
+
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
+            reader.Close();
+
 
 
 
@@ -123,6 +154,38 @@ namespace TheNewFacebook.Controllers
             profilePageViewModel.User = user;
 
             return View(profilePageViewModel);
+        }
+
+        public void getGroupInfo(List<int> mylist)
+        {
+
+            foreach (var listitem in mylist)
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["TNFContext"].ConnectionString;
+                SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["TNFContext"].ConnectionString);
+                SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[Groups] WHERE ID=@id", connection);
+                command.Parameters.AddWithValue("@id", listitem);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+
+                        string name = reader.GetString(1);
+                        ViewBag.Name = name;
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+            }
+
         }
 
         public ActionResult Login()

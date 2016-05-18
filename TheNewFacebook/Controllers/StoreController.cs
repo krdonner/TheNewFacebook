@@ -3,38 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TheNewFacebook.DAL;
+using TheNewFacebook.Models;
 
 namespace TheNewFacebook.Controllers
 {
-    public class HomeController : Controller
+    public class StoreController : Controller
     {
+        TNFContext dB = new TNFContext();
 
 
+        // GET: Store
         [LayoutInjecter("_LayoutLoggedIn")]
-        public ActionResult Chat()
-        {
-
-
-            return View();
-        }
-
         public ActionResult Index()
         {
-            return View();
+
+            var shirts = dB.Shirts.ToList();
+            ShirtsViewModel shirtsViewModel = new ShirtsViewModel();
+            shirtsViewModel.Shirts = shirts;
+            
+
+            return View(shirtsViewModel);
         }
 
-        public ActionResult About()
+        [LayoutInjecter("_LayoutLoggedIn")]
+        public ActionResult Details(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            var shirt = dB.Shirts.Find(id);
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(shirt);
         }
 
         public class LayoutInjecterAttribute : ActionFilterAttribute
@@ -55,5 +52,6 @@ namespace TheNewFacebook.Controllers
                 }
             }
         }
+
     }
 }

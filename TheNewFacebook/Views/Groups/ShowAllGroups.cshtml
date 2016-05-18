@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TheNewFacebook.Models.Groups>
 
 <table class="table">
-    
+
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.ActionLink(Html.DisplayFor(model => item.Name).ToHtmlString(), "Index", "Groups" )
+                @Html.ActionLink(Html.DisplayFor(model => item.Name).ToHtmlString(), "Index", "Groups", new { groupName = item.Name.ToString()}, null)
             </td>
             <td>
                 @Html.DisplayFor(model => item.Category)
@@ -15,7 +15,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Information)
             </td>
+            <td>
+                @using (Html.BeginForm("JoinGroup", "Groups", new { idGroup = item.ID }, FormMethod.Post))
+                {
+                    <input type="submit" value="Press here" />
+                }
+            </td>
         </tr>
     }
+
+
 
 </table>

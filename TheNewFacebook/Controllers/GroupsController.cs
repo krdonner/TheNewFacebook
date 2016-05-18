@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -23,40 +25,65 @@ namespace TheNewFacebook.Controllers
         [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult ShowAllGroups()
         {
-           /* var groupsList = new List<Groups>();
 
-            using (db)
-            {
-                foreach (var groups in db.Groups)
-                {
-                    var cl = new Groups
-                    {
-                        Name = groups.Name,
-                        Category = groups.Category,
-                        ID = groups.ID,
-                        Image = groups.Image,
-                        Information = groups.Information
-                    };
-                    groupsList.Add(cl);
-                }
-
-            }*/
 
             return View(db.Groups.ToList());
 
         }
 
 
+        [HttpPost]
+        public ActionResult JoinGroup(int idGroup)
+        {
+            var valueEmail = Session["Email"].ToString();
+
+            var userID = db.Users.Where(u => u.Email == valueEmail)
+            .Select(u => new
+            {
+
+                ID = u.ID,
+                Author = u.FirstName + " " + u.LastName
+            }).Single();
+            var idUser = userID.ID;
+
+            string connStr = ConfigurationManager.ConnectionStrings["TNFContext"].ConnectionString;
+            string sqlStatement = "INSERT INTO [dbo].[GroupUser] (GroupID, UserID) VALUES (@val1, @val2)";
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                using (SqlCommand comm = new SqlCommand())
+                {
+                    comm.Connection = conn;
+                    comm.CommandText = sqlStatement;
+                    comm.CommandType = CommandType.Text;
+
+                    comm.Parameters.AddWithValue("@val1", idGroup);
+                    comm.Parameters.AddWithValue("@val2", idUser);
+                    try
+                    {
+                        conn.Open();
+                        comm.ExecuteNonQuery();
+                    }
+                    catch (SqlException e)
+                    {
+                        Debug.WriteLine("Fel: " + e);
+                    }
+                }
+            }
+
+            return RedirectToAction("ProfilePage", "User");
+
+        }
+
 
         // GET: Groups
         [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult Index(string groupName)
         {
-            groupName = "Smurfarna";
+            Debug.WriteLine("PRINTING GROUPNAME " + groupName);
             Session["CurrentlySelectedGroup"] = groupName;
 
             var group = from a in db.Groups select a;
-            group = group.Where(a => a.Name.Contains(groupName));
+            group = group.Where(a => a.Name.Equals(groupName));
             var newsfeed = from s in db.NewsFeed select s;
             newsfeed = newsfeed.Where(s => s.GroupName.Contains(groupName));
             GroupsViewModel groupsViewModel = new GroupsViewModel();

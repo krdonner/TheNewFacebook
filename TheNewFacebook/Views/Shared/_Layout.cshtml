@@ -7,8 +7,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Content/NewsFeed.css">
-
-    <script type="text/javascript">
+    <link rel="stylesheet" type="text/css" href="~/Content/Ribbon.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Chat.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
+    <script>
         var appInsights = window.appInsights || function (config) {
             function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
         }({
@@ -17,7 +20,37 @@
 
         window.appInsights = appInsights;
         appInsights.trackPageView();
+
+
     </script>
+    <script>
+        $(document).ready(function () {
+            $(".ribbon").fadeIn(3000, function () {
+                $("#jumbo1").css({ 'display': 'block', 'opacity': '0' }).animate({ 'opacity': '1', 'left': '5%' }, 3000);
+                $("#jumbo2").css({ 'display': 'block', 'opacity': '0' }).animate({ 'opacity': '1', 'right': '5%' }, 3000);
+                $("#jumbo3").css({ 'display': 'block', 'opacity': '0' }).animate({ 'opacity': '1', 'left': '5%' }, 3000);
+            });
+        });
+
+        $(document).ready(function () {
+            $("#settings").click(function () {
+                $(this).rotate(360);
+            });
+        });
+
+    </script>
+
+    <script>
+
+        function checkout() {
+            alert("Thank you for your purchase");
+        }
+    </script>
+
+
+
+
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -32,21 +65,18 @@
             </div>
             <div class="navbar-collapse collapse">
 
-            @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - The New Facebook</p>
-    </footer>
-</div>
+    <div class="container body-content">
+        @RenderBody()
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

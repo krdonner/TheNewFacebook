@@ -1,0 +1,28 @@
+﻿@model TheNewFacebook.Models.Shirts
+
+<h2>@Model.Logo</h2>
+
+<div id="shirt-details">
+
+    <p>
+        
+        <img src="@Url.Content(Model.ImagePath)" alt="Image" height="300" width="300" />
+    </p>
+    <p>
+        <em>Logo:</em>
+        @Model.Logo
+    </p>
+    <p>
+        <em>Size:</em>
+        @Model.Size
+    </p>
+    <p>
+        <em>Price:</em>
+        @String.Format("{0:F}",
+Model.Price)
+    </p>
+    <p class="button">
+        @Html.ActionLink("Add to cart", "AddToCart",
+        "ShoppingCart", new { id = Model.Id }, "")
+    </p>
+</div>

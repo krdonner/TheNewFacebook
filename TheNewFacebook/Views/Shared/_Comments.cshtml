@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TheNewFacebook.Models.Comments>
+
+<input type="text" placeholder="HÄR ÄR LITE TEXT"/>
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(m => item.Author)
+        </td>
+    </tr>
+    <tr>
+        <td>
+        @Html.DisplayFor(m => item.Text)
+        </td>
+    </tr>
+
+
+}
+
+</table>

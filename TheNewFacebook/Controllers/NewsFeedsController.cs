@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using TheNewFacebook.DAL;
 using TheNewFacebook.Models;
@@ -24,27 +25,44 @@ namespace TheNewFacebook.Controllers
             return PartialView("_AddNewsFeed");
         }
 
-        [LayoutInjecter("_LayoutLoggedIn")]
-        public ActionResult CommentsView(int? newsfeedID)
-        {
+        /* [LayoutInjecter("_LayoutLoggedIn")]
+         public ActionResult CommentsView([Bind(Include = "ID,text,Author,NewsFeedId,userId")] Comments comment)
+         {
 
-            /*  var comments = db.Comments.Where(u => u.)
-              .Select(u => new
-              {
-                  ID = u.ID,
-                  Author = u.FirstName + " " + u.LastName
-              }).Single();
-              var id = userID.ID;
-              var author = userID.Author;*/
+             //NewsFeed nf = new NewsFeed();
+            // nf.Comments.Add(new Comments { })
+             Debug.WriteLine("INNE I COMMENTSVIEW");
+             var comments = new List<Comments>();
 
-            return PartialView("_Comments"); 
-        }
+             var s =
+                        from o in db.Comments
+                        where o.NewsFeedId == 1
+                        select o;
+             foreach (var com in s)
+             {
+                 var cl = new Comments
+                 {
+                     Author = com.Author,
+                     Text = com.Text
+                 };
+                 Debug.WriteLine("Kollar så att det finns comments    " + cl);
+                 comments.Add(cl);
+
+             }
+
+             Debug.WriteLine(comments[0].Author + "    " + comments[0].Text);
+             return PartialView("_Comments", comments);
+         }*/
 
 
         // GET: NewsFeeds
         [LayoutInjecter("_LayoutLoggedIn")]
         public ActionResult Index()
         {
+
+
+
+
             return View(db.NewsFeed.ToList());
         }
 
@@ -75,7 +93,8 @@ namespace TheNewFacebook.Controllers
 
             var userID = db.Users.Where(u => u.Email == email)
             .Select(u => new
-            {
+            {   
+                
                 ID = u.ID,
                 Author = u.FirstName + " " + u.LastName
             }).Single();
@@ -100,7 +119,7 @@ namespace TheNewFacebook.Controllers
                 };
                 db.NewsFeed.Add(t);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Groups");
+                return RedirectToAction("Index", "Groups", new { groupName = nameOfGroup });
             }
 
             return View(newsFeed);
@@ -120,8 +139,10 @@ namespace TheNewFacebook.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,text,updateDate,likes,author")] NewsFeed newsFeed)
+        public ActionResult Create([Bind(Include = "ID,text,updateDate,likes,author,ImagePath")] NewsFeed newsFeed, HttpPostedFileBase file)
         {
+
+            string imagePath = null;
             string email = Session["Email"].ToString();
 
 
@@ -139,6 +160,16 @@ namespace TheNewFacebook.Controllers
 
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    WebImage img = new WebImage(file.InputStream);
+                    img.Resize(100, 100, true, true);
+                    img.Save(HttpContext.Server.MapPath("~/Images/")
+                                                          + file.FileName);
+
+                    
+                }
+
                 var t = new NewsFeed
                 {
                     updateDate = DateTime.Now,
@@ -150,6 +181,14 @@ namespace TheNewFacebook.Controllers
 
 
                 };
+                if (file != null)
+                {
+                    imagePath = "~/Images/" + file.FileName;
+
+                }
+                t.ImagePath = imagePath;
+
+
                 db.NewsFeed.Add(t);
                 db.SaveChanges();
                 return RedirectToAction("ProfilePage", "User");
